@@ -88,7 +88,8 @@ else:
 
 def md5_hex(x: Any) -> str:
     x = x.encode("utf-8")
-    m = hashlib.md5()
+    # Use the .new() function to ensure that if 'usedforsecurity' is not supported on a platform, that it doesn't cause this to fail
+    m = hashlib.new('md5', usedforsecurity=False)
     m.update(x)
     return m.hexdigest()
 
